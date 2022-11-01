@@ -32,6 +32,7 @@ class Lexer
 
         Token literal();
         Token integerLiteral();
+        void subIntegerLiteral();
         Token operatorToken(char ch);
 
     public:

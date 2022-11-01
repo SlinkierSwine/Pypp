@@ -74,11 +74,22 @@ Token Lexer::integerLiteral()
 {
     char c = getNextChar();
     Token token = makeToken(token_type_t::NUM);
+    current_lexeme.push_back(c);
+    subIntegerLiteral();
+    return token;
+}
+
+
+void Lexer::subIntegerLiteral()
+{
+    char c = getNextChar();
     if (isDigit(c))
     {
         current_lexeme.push_back(c);
+        subIntegerLiteral();
     }
-    return token;
+    else
+        ungetChar();
 }
 
 
