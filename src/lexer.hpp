@@ -11,8 +11,8 @@ class Lexer
         std::fstream source;
         std::string file_path;
 
-        unsigned int line = 0;
-        unsigned int col = 0;
+        unsigned int line = 1;
+        unsigned int col = 1;
 
         std::vector<char> symbols = {' ', '\t', '\n', '!',
             '%' , '^' , '~' , '&' ,

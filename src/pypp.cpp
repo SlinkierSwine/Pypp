@@ -9,8 +9,12 @@
 
 int compile(std::string filename){
     Lexer lexer = Lexer(filename);
-    lexer.getNextToken();
-    std::cout << lexer.current_lexeme;
+    Token token = lexer.getNextToken();
+    while (token.token_type != token_type_t::END_OF_FILE)
+    {
+        std::cout << lexer.current_lexeme << std::endl;
+        token = lexer.getNextToken();
+    };
     return 0;
 }
 

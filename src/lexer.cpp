@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <ostream>
 #include <string>
 #include "lexer.hpp"
 #include "token.hpp"
@@ -113,6 +114,14 @@ Token Lexer::getNextToken()
         case '0'...'9':
             ungetChar();
             token = literal();
+            break;
+        case ' ':
+        case '\n':
+            current_lexeme.clear();
+            token = getNextToken();
+            break;
+        default:
+            token = makeToken(token_type_t::END_OF_FILE);
     }
     return token;
 }
