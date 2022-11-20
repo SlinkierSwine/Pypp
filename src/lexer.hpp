@@ -9,7 +9,6 @@ class Lexer
 {
     private:
         std::fstream source;
-        std::string file_path;
 
         unsigned int line = 1;
         unsigned int col = 1;
@@ -36,10 +35,11 @@ class Lexer
         Token operatorToken(char ch);
 
     public:
-        Lexer(std::string file_path);
-
-        Token getNextToken();
+        std::string file_path;
         lexeme_t current_lexeme;
+
+        Lexer(std::string file_path);
+        Token getNextToken();
 };
 
 #endif

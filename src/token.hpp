@@ -12,6 +12,7 @@ class Token
         loc_t loc;
 
         Token(token_type_t token_type, lexeme_t lexeme, loc_t loc);
+        Token();
 };
 
 #endif

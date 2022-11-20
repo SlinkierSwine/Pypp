@@ -1,8 +1,8 @@
 #include <algorithm>
+#include <iostream>
 #include <ostream>
 #include <string>
 #include "lexer.hpp"
-#include "token.hpp"
 #include "types.hpp"
 
 
@@ -64,9 +64,11 @@ Token Lexer::literal()
     Token token = makeToken(token_type_t::NONE);
     if (isDigit(c))
     {
-        current_lexeme.push_back(c);
+        // current_lexeme.push_back(c);
+        ungetChar();
         token = integerLiteral();
     }
+    current_lexeme.clear();
     return token;
 }
 
@@ -74,9 +76,9 @@ Token Lexer::literal()
 Token Lexer::integerLiteral()
 {
     char c = getNextChar();
-    Token token = makeToken(token_type_t::NUM);
     current_lexeme.push_back(c);
     subIntegerLiteral();
+    Token token = makeToken(token_type_t::INT);
     return token;
 }
 
@@ -114,6 +116,7 @@ Token Lexer::getNextToken()
         case '0'...'9':
             ungetChar();
             token = literal();
+            // std::cout << "   " << token.lexeme << '\n';
             break;
         case ' ':
         case '\n':

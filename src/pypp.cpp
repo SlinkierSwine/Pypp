@@ -1,4 +1,6 @@
 #include "lexer.hpp"
+#include "parser.hpp"
+#include "types.hpp"
 #include <algorithm>
 #include <cstdlib>
 #include <exception>
@@ -9,12 +11,8 @@
 
 int compile(std::string filename){
     Lexer lexer = Lexer(filename);
-    Token token = lexer.getNextToken();
-    while (token.token_type != token_type_t::END_OF_FILE)
-    {
-        std::cout << lexer.current_lexeme << std::endl;
-        token = lexer.getNextToken();
-    };
+    Parser parser = Parser(lexer);
+    parser.program();
     return 0;
 }
 
@@ -33,7 +31,7 @@ int main(int argc, char *argv[]) {
     }
     catch (std::exception &err) 
     {
-    std::cerr << "Error: " << err.what() << "\n";
+    std::cerr << err.what() << "\n";
     }
   return 0;
 }

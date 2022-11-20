@@ -6,7 +6,7 @@
 typedef enum {
     NONE,
     END_OF_FILE,
-    NUM,
+    INT,
     ADD,
 } token_type_t;
 
